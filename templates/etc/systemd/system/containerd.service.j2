@@ -1,0 +1,18 @@
+#jinja2: trim_blocks:False
+{# Copyright (C) 2021 Robert Wimmer
+ # SPDX-License-Identifier: GPL-3.0-or-later
+ #}
+# {{ ansible_managed }}
+
+[Unit]
+Description=containerd container runtime
+Documentation=https://containerd.io
+After=network.target
+
+[Service]
+{%- for setting in containerd_service_settings|sort %}
+{{ setting }}={{ containerd_service_settings[setting] }}
+{%- endfor %}
+
+[Install]
+WantedBy=multi-user.target

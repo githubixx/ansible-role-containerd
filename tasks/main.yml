@@ -1,0 +1,93 @@
+---
+# Copyright (C) 2021 Robert Wimmer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Downloading containerd archive
+  get_url:
+    url: "{{ containerd_url }}"
+    dest: "{{ containerd_tmp_directory }}/{{ containerd_archive }}"
+    checksum: "sha256:{{ containerd_url }}.sha256sum"
+  tags:
+    - containerd-download
+
+- name: Unarchive containerd
+  unarchive:
+    src: "{{ containerd_tmp_directory }}/{{ containerd_archive }}"
+    dest: "{{ containerd_tmp_directory }}"
+    remote_src: true
+  tags:
+    - containerd-unarchive
+
+- name: Copy containerd binary to destination directory
+  copy:
+    src: "{{ containerd_tmp_directory }}/bin/{{ item }}"
+    dest: "{{ containerd_bin_directory }}/{{ item }}"
+    mode: "{{ containerd_binary_mode }}"
+    owner: "{{ containerd_owner | default(omit) }}"
+    group: "{{ containerd_group | default(omit) }}"
+    remote_src: true
+  with_items:
+    - containerd-shim-runc-v1
+    - ctr
+    - containerd-shim
+    - containerd
+    - containerd-shim-runc-v2
+  tags:
+    - containerd-install
+
+- name: Create directory for containerd configuration file
+  file:
+    path: "{{ containerd_conf_directory }}"
+    state: directory
+    mode: 0755
+    owner: root
+    group: root
+  tags:
+    - containerd-config
+
+- name: Create containerd configuration file
+  copy:
+    content: "{{ containerd_config }}"
+    dest: /etc/containerd/config.toml
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart containerd
+  tags:
+    - containerd-config
+
+- name: Find location of modprobe binary
+  set_fact:
+    modprobe_location: "{{ lookup('first_found', item + '/modprobe', errors='ignore') }}"
+  loop:
+    - /usr/bin
+    - /sbin
+
+- name: modprobe path
+  debug:
+    msg: "Using {{ modprobe_location }} in containerd.service"
+
+- name: Create containerd.service systemd file
+  template:
+    src: etc/systemd/system/containerd.service.j2
+    dest: /etc/systemd/system/containerd.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - reload systemd
+    - restart containerd
+  tags:
+    - containerd-systemd
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Enable and start containerd
+  service:
+    name: containerd
+    enabled: true
+    state: started
+  tags:
+    - containerd-systemd

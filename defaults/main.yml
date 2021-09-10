@@ -1,17 +1,7 @@
-<!--
-Copyright (C) 2021 Robert Wimmer
-SPDX-License-Identifier: GPL-3.0-or-later
--->
+---
+# Copyright (C) 2021 Robert Wimmer
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-ansible-role-containerd
-=======================
-
-Ansible role to install [containerd](https://github.com/containerd/containerd). `containerd` is an industry-standard container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.
-
-Role Variables
---------------
-
-```yaml
 # containerd version to install
 containerd_version: "1.5.5"
 
@@ -68,47 +58,3 @@ containerd_config: |
         runtime_type = "io.containerd.runtime.v1.linux"
         runtime_engine = "/usr/local/bin/runc"
         runtime_root = ""
-```
-
-Dependencies
-------------
-
-[githubixx.runc](https://galaxy.ansible.com/githubixx/runc)
-
-Example Playbook
-----------------
-
-```yaml
-- hosts: your-host
-  roles:
-    - githubixx.containerd
-```
-
-Testing
--------
-
-This role has a small test setup that is created using [Molecule](https://github.com/ansible-community/molecule), libvirt (vagrant-libvirt) and QEMU/KVM. Please see my blog post [Testing Ansible roles with Molecule, libvirt (vagrant-libvirt) and QEMU/KVM](https://www.tauceti.blog/posts/testing-ansible-roles-with-molecule-libvirt-vagrant-qemu-kvm/) how to setup. The test configuration is [here](https://github.com/githubixx/ansible-role-containerd/tree/master/molecule/kvm).
-
-Afterwards molecule can be executed:
-
-```bash
-molecule converge -s kvm
-```
-
-This will setup a few virtual machines (VM) with different supported Linux operating systems and installs `runc` plus `containerd`.
-
-To clean up run
-
-```bash
-molecule destroy -s kvm
-```
-
-License
--------
-
-GNU GENERAL PUBLIC LICENSE Version 3
-
-Author Information
-------------------
-
-[http://www.tauceti.blog](http://www.tauceti.blog)

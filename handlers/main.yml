@@ -1,0 +1,12 @@
+---
+# Copyright (C) 2021 Robert Wimmer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: reload systemd
+  systemd:
+    daemon_reload: true
+
+- name: restart containerd
+  systemd:
+    name: containerd
+    state: restarted
