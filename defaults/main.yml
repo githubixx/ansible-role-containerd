@@ -3,7 +3,7 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 # containerd version to install
-containerd_version: "1.5.5"
+containerd_version: "1.5.7"
 
 # Where to install "containerd" binaries.
 containerd_bin_directory: "/usr/local/bin"

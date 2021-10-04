@@ -8,12 +8,18 @@ ansible-role-containerd
 
 Ansible role to install [containerd](https://github.com/containerd/containerd). `containerd` is an industry-standard container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.
 
+Changelog
+---------
+
+see [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md)
+
+
 Role Variables
 --------------
 
 ```yaml
 # containerd version to install
-containerd_version: "1.5.5"
+containerd_version: "1.5.7"
 
 # Where to install "containerd" binaries.
 containerd_bin_directory: "/usr/local/bin"
