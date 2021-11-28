@@ -19,7 +19,7 @@ Role Variables
 
 ```yaml
 # containerd version to install
-containerd_version: "1.5.7"
+containerd_version: "1.5.8"
 
 # Where to install "containerd" binaries.
 containerd_bin_directory: "/usr/local/bin"
