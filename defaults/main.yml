@@ -27,7 +27,7 @@ containerd_binary_mode: "0755"
 containerd_os: "linux"
 
 # Processor architecture "containerd" should run on.
-# Other possible values: "386","arm64","arm"
+# Other possible values: "arm64","arm"
 containerd_arch: "amd64"
 
 # Name of the archive file name
