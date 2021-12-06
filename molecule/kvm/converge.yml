@@ -32,9 +32,6 @@
   become: true
   gather_facts: true
   tasks:
-    - name: Include runc role
-      include_role:
-        name: githubixx.runc
     - name: Include containerd role
       include_role:
         name: githubixx.containerd
