@@ -1,0 +1,29 @@
+---
+# Copyright (C) 2021 Robert Wimmer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- hosts: archlinux
+  remote_user: vagrant
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Init pacman
+      raw: |
+        pacman-key --init
+        pacman-key --populate archlinux
+      changed_when: false
+      failed_when: false
+
+    - name: Update pacman cache
+      pacman:
+        update_cache: true
+
+- hosts: ubuntu
+  remote_user: vagrant
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Update APT package cache
+      apt:
+        update_cache: true
+        cache_valid_time: 3600
