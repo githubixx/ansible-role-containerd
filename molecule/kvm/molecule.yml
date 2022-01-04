@@ -17,27 +17,62 @@ driver:
       cpus: 2
 
 platforms:
-  - name: test-containerd-ubuntu2004
+  - name: test-cd-ubuntu2004-base
     box: generic/ubuntu2004
+    groups:
+      - ubuntu
+      - base
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
         ip: 192.168.10.10
-  - name: test-containerd-ubuntu1804
-    box: generic/ubuntu1804
+  - name: test-cd-ubuntu2004-k8s-runc
+    box: generic/ubuntu2004
+    groups:
+      - ubuntu
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
         ip: 192.168.10.20
-  - name: test-containerd-arch
-    box: archlinux/archlinux
+  - name: test-cd-ubuntu2004-k8s-runc-cni
+    box: generic/ubuntu2004
+    groups:
+      - ubuntu
     interfaces:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 192.168.10.80
+        ip: 192.168.10.30
+  - name: test-cd-ubuntu2004-k8s-runc-cni-crictl
+    box: generic/ubuntu2004
+    groups:
+      - ubuntu
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.10.40
+  - name: test-cd-ubuntu1804-k8s-runc-cni-crictl
+    box: generic/ubuntu1804
+    groups:
+      - ubuntu
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.10.50
+  - name: test-cd-arch-k8s-base
+    box: archlinux/archlinux
+    groups:
+      - archlinux
+      - base
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 192.168.10.60
 
 provisioner:
   name: ansible
@@ -46,6 +81,35 @@ provisioner:
     ansible_become: true
   log: true
   lint: yamllint . && flake8 && ansible-lint
+  inventory:
+    host_vars:
+      test-cd-ubuntu2004-base:
+        runc_bin_directory: "/usr/local/sbin"
+        containerd_runc_binary_directory: "{{ runc_bin_directory }}"
+      test-cd-arch-k8s-base:
+        runc_bin_directory: "/usr/local/sbin"
+        containerd_runc_binary_directory: "{{ runc_bin_directory }}"
+      test-cd-ubuntu2004-k8s-runc:
+        containerd_flavor: "k8s"
+        containerd_runc_binary_directory: "/usr/local/sbin"
+      test-cd-ubuntu2004-k8s-runc-cni:
+        containerd_flavor: "k8s"
+        containerd_runc_binary_directory: "/usr/local/sbin"
+        containerd_cni_binary_directory: "/opt/cni/bin"
+      test-cd-ubuntu2004-k8s-runc-cni-crictl:
+        containerd_flavor: "k8s"
+        containerd_runc_binary_directory: "/usr/local/sbin"
+        containerd_cni_binary_directory: "/opt/cni/bin"
+        containerd_crictl_config_file: "crictl.yaml"
+        containerd_crictl_config_directory: "/etc"
+      test-cd-ubuntu1804-k8s-runc-cni-crictl:
+        containerd_flavor: "k8s"
+        containerd_runc_binary_directory: "/usr/local/sbin"
+        containerd_cni_binary_directory: "/opt/cni/bin"
+        containerd_crictl_config_file: "crictl.yaml"
+        containerd_crictl_config_directory: "/etc"
+        containerd_cni_netconfig_file: "10-containerd-net.conflist"
+        containerd_cni_netconfig_directory: "/etc/cni/net.d"
 
 scenario:
   name: kvm
