@@ -2,71 +2,85 @@
 # Copyright (C) 2021 Robert Wimmer
 # SPDX-License-Identifier: GPL-3.0-or-later
 
+- name: Include variables depending on flavor
+  include_vars:
+    file: "flavor_{{ containerd_flavor }}.yml"
+  tags:
+    - containerd-install
+
 - name: Downloading containerd archive
   get_url:
     url: "{{ containerd_url }}"
-    dest: "{{ containerd_tmp_directory }}/{{ containerd_archive }}"
+    dest: "{{ containerd_tmp_directory }}/containerd.tar.gz"
     checksum: "sha256:{{ containerd_url }}.sha256sum"
   tags:
+    - containerd-install
     - containerd-download
 
 - name: Unarchive containerd
   unarchive:
-    src: "{{ containerd_tmp_directory }}/{{ containerd_archive }}"
+    src: "{{ containerd_tmp_directory }}/containerd.tar.gz"
     dest: "{{ containerd_tmp_directory }}"
     remote_src: true
   tags:
+    - containerd-install
     - containerd-unarchive
 
-- name: Copy containerd binary to destination directory
+- name: Copy containerd binaries to destination directory
   copy:
-    src: "{{ containerd_tmp_directory }}/bin/{{ item }}"
-    dest: "{{ containerd_bin_directory }}/{{ item }}"
+    src: "{{ containerd_tmp_directory }}{{ containerd_binaries_src_directory }}/{{ binary }}"
+    dest: "{{ containerd_binary_directory }}/{{ binary }}"
     mode: "{{ containerd_binary_mode }}"
     owner: "{{ containerd_owner | default(omit) }}"
     group: "{{ containerd_group | default(omit) }}"
     remote_src: true
-  with_items:
-    - containerd-shim-runc-v1
-    - ctr
-    - containerd-shim
-    - containerd
-    - containerd-shim-runc-v2
+  loop: "{{ containerd_binaries }}"
+  loop_control:
+    loop_var: "binary"
   tags:
     - containerd-install
 
 - name: Create directory for containerd configuration file
   file:
-    path: "{{ containerd_conf_directory }}"
+    path: "{{ containerd_config_directory }}"
     state: directory
     mode: 0755
     owner: root
     group: root
   tags:
+    - containerd_install
     - containerd-config
 
 - name: Create containerd configuration file
   copy:
     content: "{{ containerd_config }}"
-    dest: /etc/containerd/config.toml
+    dest: "{{ containerd_config_directory }}/config.toml"
     owner: root
     group: root
     mode: 0644
   notify:
     - restart containerd
   tags:
+    - containerd_install
     - containerd-config
 
 - name: Find location of modprobe binary
   set_fact:
-    modprobe_location: "{{ lookup('first_found', item + '/modprobe', errors='ignore') }}"
+    modprobe_location: "{{ lookup('first_found', modprobe_path + '/modprobe', errors='ignore') }}"
   loop:
     - /usr/bin
+    - /usr/sbin
     - /sbin
+  loop_control:
+    loop_var: "modprobe_path"
+  tags:
+    - containerd_install
 
 - name: modprobe path
   debug:
     msg: "Using {{ modprobe_location }} in containerd.service"
+  tags:
+    - containerd_install
 
 - name: Create containerd.service systemd file
   template:
@@ -79,7 +93,128 @@
     - reload systemd
     - restart containerd
   tags:
+    - containerd-install
     - containerd-systemd
+
+- name: Copy runc binary to destination directory
+  copy:
+    src: "{{ containerd_tmp_directory }}/usr/local/sbin/runc"
+    dest: "{{ containerd_runc_binary_directory }}/runc"
+    mode: "{{ containerd_runc_binary_mode }}"
+    owner: "{{ containerd_runc_owner | default(omit) }}"
+    group: "{{ containerd_runc_group | default(omit) }}"
+    remote_src: true
+  tags:
+    - runc-install
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_runc_binary_directory is defined
+    - containerd_runc_binary_mode is defined
+
+- name: Ensure crictl configuration directory
+  file:
+    path: "{{ containerd_crictl_config_directory }}"
+    state: directory
+    mode: "{{ containerd_crictl_config_directory_mode | default('0755') }}"
+    owner: "{{ containerd_crictl_config_directory_owner | default('root') }}"
+    group: "{{ containerd_crictl_config_directory_group | default('root') }}"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_crictl_config_directory is defined
+    - containerd_crictl_config_owner is defined
+    - containerd_crictl_config_group is defined
+  tags:
+    - containerd-crictl-install
+
+- name: Copy crictl configuration to destination directory
+  copy:
+    content: |
+      {{ containerd_crictl_config_file_content }}
+    dest: "{{ containerd_crictl_config_directory }}/{{ containerd_crictl_config_file }}"
+    mode: "{{ containerd_crictl_config_file_mode | default('0644') }}"
+    owner: "{{ containerd_crictl_config_file_owner | default(omit) }}"
+    group: "{{ containerd_crictl_config_file_group | default(omit) }}"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_crictl_config_directory is defined
+    - containerd_crictl_config_file is defined
+    - containerd_crictl_config_file_mode is defined
+  tags:
+    - containerd-crictl-install
+
+- name: Ensure CNI bin directory
+  file:
+    path: "{{ containerd_cni_binary_directory }}"
+    state: directory
+    mode: "{{ containerd_cni_binary_directory_mode }}"
+    owner: "{{ containerd_cni_binary_owner | default(omit) }}"
+    group: "{{ containerd_cni_binary_group | default(omit) }}"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_cni_binary_directory is defined
+    - containerd_cni_binary_owner is defined
+    - containerd_cni_binary_group is defined
+  tags:
+    - containerd-cni-install
+
+- name: Copy CNI binaries to destination directory
+  copy:
+    src: "{{ containerd_tmp_directory }}/opt/cni/bin/{{ cni_binary }}"
+    dest: "{{ containerd_cni_binary_directory }}/{{ cni_binary }}"
+    mode: "{{ containerd_cni_binary_mode }}"
+    owner: "{{ containerd_cni_binary_owner | default(omit) }}"
+    group: "{{ containerd_cni_binary_group | default(omit) }}"
+    remote_src: true
+  loop: "{{ containerd_cni_binaries }}"
+  loop_control:
+    loop_var: "cni_binary"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_cni_binary_directory is defined
+    - containerd_cni_binary_owner is defined
+    - containerd_cni_binary_group is defined
+  tags:
+    - containerd-cni-install
+
+- name: Ensure CNI netconfig directory
+  file:
+    path: "{{ containerd_cni_netconfig_directory }}"
+    state: directory
+    mode: "{{ containerd_cni_netconfig_directory_mode | default('0755') }}"
+    owner: "{{ containerd_cni_netconfig_owner | default(omit) }}"
+    group: "{{ containerd_cni_netconfig_group | default(omit) }}"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_cni_netconfig_file is defined
+    - containerd_cni_netconfig_directory is defined
+    - containerd_cni_netconfig_file_content is defined
+  tags:
+    - containerd-cni-install
+    - containerd-cni-conf
+
+- name: Copy CNI netconfig to destination directory
+  copy:
+    content: |
+      {{ containerd_cni_netconfig_file_content }}
+    dest: "{{ containerd_cni_netconfig_directory }}/{{ containerd_cni_netconfig_file }}"
+    mode: "{{ containerd_cni_netconfig_file_mode | default('0644') }}"
+    owner: "{{ containerd_cni_netconfig_file_owner | default(omit) }}"
+    group: "{{ containerd_cni_netconfig_file_group | default(omit) }}"
+  when:
+    - containerd_flavor is defined
+    - containerd_flavor == "k8s"
+    - containerd_cni_netconfig_file is defined
+    - containerd_cni_netconfig_directory is defined
+    - containerd_cni_netconfig_file_content is defined
+  tags:
+    - containerd-cni-install
+    - containerd-cni-conf
 
 - name: Flush handlers
   meta: flush_handlers
