@@ -39,7 +39,7 @@
 # vlan, host-local, flannel, bridge, host-device, tuning, firewall, bandwidth,
 # ipvlan, sbr, dhcp, portmap, ptp, static, macvlan, loopback
 #
-# So no need to install them seperately. But this role also allows you to skip
+# So no need to install them separately. But this role also allows you to skip
 # CNI installation (see further down below).
 #
 # Before 0.2.0+1.5.8 of this role this setting wasn't available but "base"
@@ -96,14 +96,20 @@ containerd_service_settings:
   "LimitNPROC": "infinity"
   "LimitCORE": "infinity"
 
-# Content of configuration file of containerd. The settings below are the
+# Content of configuration file of containerd. The settings below are (mainly) the
 # default "containerd" settings generated with the following command (needs
 # "containerd" binary installed of course):
 #
 # containerd config default
 #
-# The configuration file contains a few role variables that will be replaced when
-# the configuration template is processed.
+# Difference to default configuration:
+#
+# - The configuration file contains a few role variables that will be replaced when
+#   the configuration template is processed.
+# - In "plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options" the
+#   setting "SystemdCgroup" is set to "true" instead of "false". This is relevant for
+#   Kubernetes e.g. Also see:
+#   https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
 #
 containerd_config: |
   disabled_plugins = []
@@ -217,7 +223,7 @@ containerd_config: |
               NoPivotRoot = false
               Root = ""
               ShimCgroup = ""
-              SystemdCgroup = false
+              SystemdCgroup = true
 
         [plugins."io.containerd.grpc.v1.cri".containerd.untrusted_workload_runtime]
           base_runtime_spec = ""
@@ -331,7 +337,7 @@ containerd_config: |
 # Directory where to store the "runc" binary.
 #
 # As mentioned above if "containerd_flavor: base" was specified "runc" needs
-# to be installed seperately. Without a "runc" binary containerd won't work.
+# to be installed separately. Without a "runc" binary containerd won't work.
 #
 # Commented by default. If "runc" should be installed just remove the comment
 # and adjust the value if needed. But the default should be just fine.

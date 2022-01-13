@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0+1.5.9
+
+- In `plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options` the setting `SystemdCgroup` is now set to `true` instead of `false`. This is relevant for Kubernetes e.g. Also see: [Kubernetes container-runtimes - containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
+
 ## 0.2.1+1.5.9
 
 - update `containerd` to 'v1.5.9`
