@@ -65,14 +65,21 @@
     - containerd-config
 
 - name: Find location of modprobe binary
-  set_fact:
-    modprobe_location: "{{ lookup('first_found', modprobe_path + '/modprobe', errors='ignore') }}"
+  ansible.builtin.stat:
+    path: "{{ path }}"
   loop:
-    - /usr/bin
-    - /usr/sbin
-    - /sbin
+    - /usr/bin/modprobe
+    - /usr/sbin/modprobe
+    - /sbin/modprobe
   loop_control:
-    loop_var: "modprobe_path"
+    loop_var: path
+  register: modprobe_locations
+  tags:
+    - containerd_install
+
+- name: Set modprobe_location
+  ansible.builtin.set_fact:
+    modprobe_location: "{{ modprobe_locations.results | selectattr('stat.exists', '==', True) | map(attribute='path') | first }}"
   tags:
     - containerd_install
 
