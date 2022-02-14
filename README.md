@@ -228,7 +228,7 @@ containerd_config: |
             runtime_type = "io.containerd.runc.v2"
 
             [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-              BinaryName = ""
+              BinaryName = "{% if containerd_runc_binary_directory is defined %}{{ containerd_runc_binary_directory }}/runc{% endif -%}"
               CriuImagePath = ""
               CriuPath = ""
               CriuWorkPath = ""
