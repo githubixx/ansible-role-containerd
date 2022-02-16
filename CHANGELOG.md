@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0+1.6.0
+
+- update `containerd` to 'v1.6.0`
+- update `containerd_config` variable value for containerd `v.1.6.0`
+
 ## 0.4.0+1.5.9
 
 - The `BinaryName` value in `container_config` variable will now use the value of `containerd_runc_binary_directory` if defined by default. (contribution by @tiagoblackcode)
