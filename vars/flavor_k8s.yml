@@ -29,3 +29,4 @@ containerd_cni_binaries:
   - static
   - tuning
   - vlan
+  - vrf
