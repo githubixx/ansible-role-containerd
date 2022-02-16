@@ -18,7 +18,6 @@ containerd_cni_binaries:
   - bridge
   - dhcp
   - firewall
-  - flannel
   - host-device
   - host-local
   - ipvlan
