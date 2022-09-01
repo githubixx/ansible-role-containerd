@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.6.0+1.6.8
+
+- fix file permissions in task `Downloading containerd archive`
+- ansible-lint: fix issues
+- `min_ansible_version` in `meta/main.yml` value should be string
+- add `.yamllit`
+
 ## 0.5.5+1.6.8
 
 - update `containerd` to 'v1.6.8`
