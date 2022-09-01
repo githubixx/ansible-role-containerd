@@ -83,7 +83,7 @@
   tags:
     - containerd_install
 
-- name: modprobe path
+- name: Modprobe path
   ansible.builtin.debug:
     msg: "Using {{ modprobe_location }} in containerd.service"
   tags:
