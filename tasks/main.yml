@@ -59,7 +59,7 @@
     group: root
     mode: 0644
   notify:
-    - restart containerd
+    - Restart containerd
   tags:
     - containerd_install
     - containerd-config
@@ -97,8 +97,8 @@
     group: root
     mode: 0644
   notify:
-    - reload systemd
-    - restart containerd
+    - Reload systemd
+    - Restart containerd
   tags:
     - containerd-install
     - containerd-systemd
