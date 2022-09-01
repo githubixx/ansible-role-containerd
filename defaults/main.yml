@@ -56,7 +56,7 @@ containerd_binary_directory: "/usr/local/bin"
 containerd_config_directory: "/etc/containerd"
 
 # Directory to store the archive
-containerd_tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp',true) }}"
+containerd_tmp_directory: "{{ lookup('env', 'TMPDIR') | default('/tmp', true) }}"
 
 # Owner/group of "containerd" binaries. If the variables are not set
 # the resulting binary will be owned by the current user.
