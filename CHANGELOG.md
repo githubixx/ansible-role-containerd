@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.6.1+1.6.9
+
+- update `containerd` to 'v1.6.9`
+
 ## 0.6.0+1.6.8
 
 - fix file permissions in task `Downloading containerd archive`
