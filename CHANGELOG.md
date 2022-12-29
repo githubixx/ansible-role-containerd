@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0+1.6.14
+
+- add Github release action to push new release to Ansible Galaxy
+
 ## 0.6.2+1.6.14
 
 - update `containerd` to 'v1.6.14`
