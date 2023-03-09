@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.0+1.6.19
+
+- update `containerd` to 'v1.6.19`
+- fix Molecule `converge.yml`
+
 ## 0.7.0+1.6.14
 
 - add Github release action to push new release to Ansible Galaxy
