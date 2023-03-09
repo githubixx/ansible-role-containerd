@@ -5,18 +5,21 @@
 - hosts: archlinux
   remote_user: vagrant
   become: true
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Init pacman
-      raw: |
+      ansible.builtin.raw: |
         pacman-key --init
         pacman-key --populate archlinux
       changed_when: false
       failed_when: false
 
-    - name: Update pacman cache
-      pacman:
-        update_cache: true
+    - name: Install Python
+      ansible.builtin.raw: |
+        pacman -S --noconfirm python
+      args:
+        executable: /bin/bash
+      changed_when: false
 
 - hosts: ubuntu
   remote_user: vagrant
@@ -24,6 +27,6 @@
   gather_facts: true
   tasks:
     - name: Update APT package cache
-      apt:
+      ansible.builtin.apt:
         update_cache: true
         cache_valid_time: 3600
