@@ -1,0 +1,27 @@
+---
+- name: Verify setup
+  hosts: all
+  tasks:
+    - name: Pull nginx image with ctr
+      ansible.builtin.command: ctr images pull docker.io/library/nginx:1.21 
+      register: ctr_pull_output
+      changed_when: false
+
+    - name: Ensure kubectl version output contains correct version string
+      ansible.builtin.assert:
+        that:
+          - "'done' in ctr_pull_output.stdout"
+
+    - name: Start nginx with ctr
+      ansible.builtin.command: ctr run -d -t docker.io/library/nginx:1.21 nginx
+      changed_when: false
+
+    - name: List containers
+      ansible.builtin.command: ctr containers ls
+      register: ctr_ls_output
+      changed_when: false
+
+    - name: Ensure nginx container running
+      ansible.builtin.assert:
+        that:
+          - "'nginx' in ctr_ls_output.stdout"
