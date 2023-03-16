@@ -14,6 +14,9 @@
       changed_when: false
       failed_when: false
 
+    - name: Updating pacman cache
+      raw: pacman -Sy
+
     - name: Install Python
       ansible.builtin.raw: |
         pacman -S --noconfirm python
