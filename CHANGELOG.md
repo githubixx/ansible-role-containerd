@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0+1.7.0
+
+- update `containerd` to 'v1.7.0`
+- add Molecule `verify` step
+
 ## 0.8.0+1.6.19
 
 - update `containerd` to 'v1.6.19`
