@@ -3,7 +3,7 @@
   hosts: all
   tasks:
     - name: Pull nginx image with ctr
-      ansible.builtin.command: ctr images pull docker.io/library/nginx:1.21 
+      ansible.builtin.command: ctr images pull docker.io/library/nginx:1.21
       register: ctr_pull_output
       changed_when: false
 
