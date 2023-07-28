@@ -5,7 +5,7 @@
 - update `containerd` to 'v1.7.3`
 - add support for Ubuntu 22.04
 - **BREAKING**: remove support for Ubuntu 18.04 (reached end of life)
-- **BREAKING**: When `containerd` or `CNI` binaries are upgraded `containerd.service` will be restarted. Up until this version this only happened when `containerd` configuration was updated. 
+- **BREAKING**: When `containerd` or `CNI` binaries are upgraded `containerd.service` will be restarted. Up until this version this only happened when `containerd` configuration was updated.
 
 ## 0.9.0+1.7.0
 
@@ -34,7 +34,7 @@
 - fix file permissions in task `Downloading containerd archive`
 - ansible-lint: fix issues
 - `min_ansible_version` in `meta/main.yml` value should be string
-- add `.yamllit`
+- add `.yamllint`
 
 ## 0.5.5+1.6.8
 
