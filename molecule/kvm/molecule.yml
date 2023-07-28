@@ -12,13 +12,12 @@ driver:
   provider:
     name: libvirt
     type: libvirt
-    options:
-      memory: 192
-      cpus: 2
 
 platforms:
   - name: test-cd-ubuntu2004-base
     box: generic/ubuntu2004
+    memory: 1024
+    cpus: 2
     groups:
       - ubuntu
       - base
@@ -29,6 +28,8 @@ platforms:
         ip: 192.168.10.10
   - name: test-cd-ubuntu2004-k8s-runc
     box: generic/ubuntu2004
+    memory: 1024
+    cpus: 2
     groups:
       - ubuntu
     interfaces:
@@ -38,6 +39,8 @@ platforms:
         ip: 192.168.10.20
   - name: test-cd-ubuntu2004-k8s-runc-cni
     box: generic/ubuntu2004
+    memory: 1024
+    cpus: 2
     groups:
       - ubuntu
     interfaces:
@@ -47,6 +50,8 @@ platforms:
         ip: 192.168.10.30
   - name: test-cd-ubuntu2004-k8s-runc-cni-crictl
     box: generic/ubuntu2004
+    memory: 1024
+    cpus: 2
     groups:
       - ubuntu
     interfaces:
@@ -54,8 +59,10 @@ platforms:
         network_name: private_network
         type: static
         ip: 192.168.10.40
-  - name: test-cd-ubuntu1804-k8s-runc-cni-crictl
-    box: generic/ubuntu1804
+  - name: test-cd-ubuntu2204-k8s-runc-cni-crictl
+    box: generic/ubuntu2204
+    memory: 1024
+    cpus: 2
     groups:
       - ubuntu
     interfaces:
@@ -65,6 +72,8 @@ platforms:
         ip: 192.168.10.50
   - name: test-cd-arch-k8s-base
     box: archlinux/archlinux
+    memory: 1024
+    cpus: 2
     groups:
       - archlinux
       - base
@@ -102,7 +111,7 @@ provisioner:
         containerd_cni_binary_directory: "/opt/cni/bin"
         containerd_crictl_config_file: "crictl.yaml"
         containerd_crictl_config_directory: "/etc"
-      test-cd-ubuntu1804-k8s-runc-cni-crictl:
+      test-cd-ubuntu2204-k8s-runc-cni-crictl:
         containerd_flavor: "k8s"
         containerd_runc_binary_directory: "/usr/local/sbin"
         containerd_cni_binary_directory: "/opt/cni/bin"
