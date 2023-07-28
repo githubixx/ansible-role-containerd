@@ -1,8 +1,9 @@
 # Changelog
 
-## 0.9.1+1.7.3
+## 0.10.0+1.7.3
 
 - update `containerd` to 'v1.7.3`
+- **BREAKING**: When `containerd` or `CNI` binaries are upgraded `containerd.service` will be restarted. Up until this version this only happened when `containerd` configuration was updated. 
 
 ## 0.9.0+1.7.0
 
