@@ -38,6 +38,8 @@
   loop: "{{ containerd_binaries }}"
   loop_control:
     loop_var: "binary"
+  notify:
+    - Restart containerd
   tags:
     - containerd-install
 
@@ -114,6 +116,8 @@
     remote_src: true
   tags:
     - runc-install
+  notify:
+    - Restart containerd
   when:
     - containerd_flavor is defined
     - containerd_flavor == "k8s"
@@ -180,6 +184,8 @@
   loop: "{{ containerd_cni_binaries }}"
   loop_control:
     loop_var: "cni_binary"
+  notify:
+    - Restart containerd
   when:
     - containerd_flavor is defined
     - containerd_flavor == "k8s"

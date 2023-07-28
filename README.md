@@ -62,7 +62,7 @@ Role Variables
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.0"
+containerd_version: "1.7.3"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
@@ -554,6 +554,12 @@ molecule converge -s kvm
 ```
 
 This will setup a few virtual machines (VM) with different supported Linux operating systems and installs `containerd` and optionally `runc`, `crictl` and the `CNI` plugins (which are needed by Kubernetes e.g.).
+
+A small verification step is also included. It pulls a nginx container and runs it to make sure that `containerd` is setup correctly and is able to run container images:
+
+```bash
+molecule verify -s kvm
+```
 
 To clean up run
 

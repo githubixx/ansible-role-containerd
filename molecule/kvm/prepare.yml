@@ -2,7 +2,8 @@
 # Copyright (C) 2021 Robert Wimmer
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- hosts: archlinux
+- name: Run tasks for Archlinux
+  hosts: archlinux
   remote_user: vagrant
   become: true
   gather_facts: false
@@ -15,7 +16,9 @@
       failed_when: false
 
     - name: Updating pacman cache
-      raw: pacman -Sy
+      ansible.builtin.raw: |
+        pacman -Sy
+      changed_when: false
 
     - name: Install Python
       ansible.builtin.raw: |
@@ -24,7 +27,8 @@
         executable: /bin/bash
       changed_when: false
 
-- hosts: ubuntu
+- name: Run tasks for Ubuntu
+  hosts: ubuntu
   remote_user: vagrant
   become: true
   gather_facts: true
