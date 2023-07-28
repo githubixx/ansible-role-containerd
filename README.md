@@ -62,7 +62,7 @@ Role Variables
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.0"
+containerd_version: "1.7.3"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
