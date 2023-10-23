@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.0+1.7.6
+
+- update `containerd` to 'v1.7.6`
+
 ## 0.10.0+1.7.3
 
 - update `containerd` to 'v1.7.3`
