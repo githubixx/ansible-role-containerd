@@ -16,7 +16,7 @@ driver:
 platforms:
   - name: test-cd-ubuntu2004-base
     box: generic/ubuntu2004
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - ubuntu
@@ -28,7 +28,7 @@ platforms:
         ip: 192.168.10.10
   - name: test-cd-ubuntu2004-k8s-runc
     box: generic/ubuntu2004
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - ubuntu
@@ -39,7 +39,7 @@ platforms:
         ip: 192.168.10.20
   - name: test-cd-ubuntu2004-k8s-runc-cni
     box: generic/ubuntu2004
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - ubuntu
@@ -50,7 +50,7 @@ platforms:
         ip: 192.168.10.30
   - name: test-cd-ubuntu2004-k8s-runc-cni-crictl
     box: generic/ubuntu2004
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - ubuntu
@@ -61,7 +61,7 @@ platforms:
         ip: 192.168.10.40
   - name: test-cd-ubuntu2204-k8s-runc-cni-crictl
     box: generic/ubuntu2204
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - ubuntu
@@ -72,7 +72,7 @@ platforms:
         ip: 192.168.10.50
   - name: test-cd-arch-k8s-base
     box: archlinux/archlinux
-    memory: 1024
+    memory: 2048
     cpus: 2
     groups:
       - archlinux
