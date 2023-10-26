@@ -2,15 +2,6 @@
 # Copyright (C) 2021-2023 Robert Wimmer
 # SPDX-License-Identifier: GPL-3.0-or-later
 
-- name: Install runc
-  hosts: base
-  remote_user: vagrant
-  become: true
-  tasks:
-    - name: Include runc role
-      ansible.builtin.include_role:
-        name: githubixx.runc
-
 - name: Install containerd
   hosts: all
   remote_user: vagrant
