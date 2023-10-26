@@ -2,23 +2,23 @@
 
 ## 0.11.0+1.7.7
 
-- update `containerd` to 'v1.7.7`
+- update `containerd` to `v1.7.7`
 
 ## 0.10.0+1.7.3
 
-- update `containerd` to 'v1.7.3`
+- update `containerd` to `v1.7.3`
 - add support for Ubuntu 22.04
 - **BREAKING**: remove support for Ubuntu 18.04 (reached end of life)
 - **BREAKING**: When `containerd` or `CNI` binaries are upgraded `containerd.service` will be restarted. Up until this version this only happened when `containerd` configuration was updated.
 
 ## 0.9.0+1.7.0
 
-- update `containerd` to 'v1.7.0`
+- update `containerd` to `v1.7.0`
 - add Molecule `verify` step
 
 ## 0.8.0+1.6.19
 
-- update `containerd` to 'v1.6.19`
+- update `containerd` to `v1.6.19`
 - fix Molecule `converge.yml`
 
 ## 0.7.0+1.6.14
@@ -27,11 +27,11 @@
 
 ## 0.6.2+1.6.14
 
-- update `containerd` to 'v1.6.14`
+- update `containerd` to `v1.6.14`
 
 ## 0.6.1+1.6.9
 
-- update `containerd` to 'v1.6.9`
+- update `containerd` to `v1.6.9`
 
 ## 0.6.0+1.6.8
 
@@ -42,27 +42,27 @@
 
 ## 0.5.5+1.6.8
 
-- update `containerd` to 'v1.6.8`
+- update `containerd` to `v1.6.8`
 
 ## 0.5.4+1.6.6
 
-- update `containerd` to 'v1.6.6`
+- update `containerd` to `v1.6.6`
 
 ## 0.5.3+1.6.4
 
-- update `containerd` to 'v1.6.4`
+- update `containerd` to `v1.6.4`
 
 ## 0.5.2+1.6.3
 
-- update `containerd` to 'v1.6.3`
+- update `containerd` to `v1.6.3`
 
 ## 0.5.1+1.6.2
 
-- update `containerd` to 'v1.6.2`
+- update `containerd` to `v1.6.2`
 
 ## 0.5.0+1.6.0
 
-- update `containerd` to 'v1.6.0`
+- update `containerd` to `v1.6.0`
 - update `containerd_config` variable value for containerd `v.1.6.0`
 
 ## 0.4.0+1.5.9
@@ -76,7 +76,7 @@
 
 ## 0.2.1+1.5.9
 
-- update `containerd` to 'v1.5.9`
+- update `containerd` to `v1.5.9`
 
 ## 0.2.0+1.5.8
 
