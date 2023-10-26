@@ -336,43 +336,6 @@ containerd_config: |
 
 
 #################################################
-# crictl
-#################################################
-
-# Configuration file for "crictl" (client for CRI).
-#
-# Commented by default. If "crictl" should be installed just remove the
-# comments and adjust the values if needed. But the defaults should be just fine.
-# As long as "containerd_crictl_config_(file|directory)" are commented all the other
-# "containerd_crictl_config_*" variables have no effect. The same is true if
-# "containerd_flavor: base" is specified.
-# containerd_crictl_config_file: "crictl.yaml"
-# containerd_crictl_config_directory: "/etc"
-
-# Directory permissions for directory defined in "containerd_crictl_config_directory"
-# As the default for this directory is "/etc" be careful about permissions!
-# If this variable is not specified the default is "0755".
-containerd_crictl_config_directory_mode: "0755"
-
-# Owner/group of directory defined in "containerd_crictl_config_directory".
-# As the default for this directory is "/etc" be careful about ownership!
-# If these variables are not specified the default owner is "root" / group "root".
-containerd_crictl_config_directory_owner: "root"
-containerd_crictl_config_directory_group: "root"
-
-# Owner/group of "crictl.yaml". If the variables are not set
-# the resulting binary will be owned by the current user.
-containerd_crictl_config_file_owner: "root"
-containerd_crictl_config_file_group: "root"
-
-# Specifies the permissions of the "crictl.yaml" file.
-containerd_crictl_config_file_mode: "0644"
-
-containerd_crictl_config_file_content: |
-  runtime-endpoint: unix:///run/containerd/containerd.sock
-
-
-#################################################
 # CNI
 #################################################
 

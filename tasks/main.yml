@@ -106,39 +106,6 @@
     - containerd-install
     - containerd-systemd
 
-- name: Ensure crictl configuration directory
-  ansible.builtin.file:
-    path: "{{ containerd_crictl_config_directory }}"
-    state: directory
-    mode: "{{ containerd_crictl_config_directory_mode | default('0755') }}"
-    owner: "{{ containerd_crictl_config_directory_owner | default('root') }}"
-    group: "{{ containerd_crictl_config_directory_group | default('root') }}"
-  when:
-    - containerd_flavor is defined
-    - containerd_flavor == "k8s"
-    - containerd_crictl_config_directory is defined
-    - containerd_crictl_config_owner is defined
-    - containerd_crictl_config_group is defined
-  tags:
-    - containerd-crictl-install
-
-- name: Copy crictl configuration to destination directory
-  ansible.builtin.copy:
-    content: |
-      {{ containerd_crictl_config_file_content }}
-    dest: "{{ containerd_crictl_config_directory }}/{{ containerd_crictl_config_file }}"
-    mode: "{{ containerd_crictl_config_file_mode | default('0644') }}"
-    owner: "{{ containerd_crictl_config_file_owner | default(omit) }}"
-    group: "{{ containerd_crictl_config_file_group | default(omit) }}"
-  when:
-    - containerd_flavor is defined
-    - containerd_flavor == "k8s"
-    - containerd_crictl_config_directory is defined
-    - containerd_crictl_config_file is defined
-    - containerd_crictl_config_file_mode is defined
-  tags:
-    - containerd-crictl-install
-
 - name: Ensure CNI bin directory
   ansible.builtin.file:
     path: "{{ containerd_cni_binary_directory }}"
