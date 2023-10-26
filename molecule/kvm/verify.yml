@@ -7,7 +7,7 @@
       register: ctr_pull_output
       changed_when: false
 
-    - name: Ensure kubectl version output contains correct version string
+    - name: Ensure ctr output contains correct string
       ansible.builtin.assert:
         that:
           - "'done' in ctr_pull_output.stdout"
