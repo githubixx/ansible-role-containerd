@@ -17,48 +17,7 @@ Role Variables
 --------------
 
 ```yaml
-# "containerd" is distributed in two flavors. Possible values:
-#
-# - base
-# - k8s
-#
-# First difference is the download size:
-# Choosing "base" will download around 35 MByte of data during installation.
-# Choosing "k8s" will download around 100 MByte of data during installation.
-#
-# If you choose "base" the role will only install a minimal set of
-# "containerd" binaries:
-#
-# containerd, containerd-shim, containerd-shim-runc-v1, containerd-shim-runc-v2
-# and ctr.
-#
-# Please note: Specifying "base" also means that no "runc" will be installed.
-# "runc" needs to be available before this role gets installed. So make sure
-# that "runc" is already installed if you don't want to use the "k8s" flavor.
-# To install "runc" separately you can also use this Ansible role:
-#
-# - https://github.com/githubixx/ansible-role-runc
-# - https://galaxy.ansible.com/githubixx/runc
-#
-# If you choose "k8s" this role will install a set of files specifically for
-# Kubernetes. It contains all required binaries and files for using containerd
-# with Kubernetes. Besides the binaries mentioned above it additionally contains:
-#
-# crictl, critest and runc
-#
-# "runc" can also be installed separately if it's already installed by a
-# different process (see further down below).
-#
-# It also contains the CNI binaries which currently are:
-#
-# vlan, host-local, flannel, bridge, host-device, tuning, firewall, bandwidth,
-# ipvlan, sbr, dhcp, portmap, ptp, static, macvlan, loopback
-#
-# So no need to install them separately. But this role also allows you to skip
-# CNI installation (see further down below).
-#
-# Before 0.2.0+1.5.8 of this role this setting wasn't available but "base"
-# basically mimics this behavior.
+# Only value "base" is currently supported
 containerd_flavor: "base"
 
 # containerd version to install
@@ -92,11 +51,8 @@ containerd_arch: "amd64"
 # Name of the archive file name
 containerd_archive_base: "containerd-{{ containerd_version }}-{{ containerd_os }}-{{ containerd_arch }}.tar.gz"
 
-# Name of the release tarball specifically for Kubernetes
-containerd_archive_k8s: "cri-containerd-cni-{{ containerd_version }}-{{ containerd_os }}-{{ containerd_arch }}.tar.gz"
-
 # The containerd download URL (normally no need to change it)
-containerd_url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/{{ containerd_archive_base if containerd_flavor == 'base' else containerd_archive_k8s }}"
+containerd_url: "https://github.com/containerd/containerd/releases/download/v{{ containerd_version }}/{{ containerd_archive_base }}"
 
 # containerd systemd service settings
 containerd_service_settings:
