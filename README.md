@@ -486,21 +486,21 @@ This role has a small test setup that is created using [Molecule](https://github
 Afterwards molecule can be executed:
 
 ```bash
-molecule converge -s kvm
+molecule converge
 ```
 
-This will setup a few virtual machines (VM) with different supported Linux operating systems and installs `containerd` and optionally `runc`, `crictl` and the `CNI` plugins (which are needed by Kubernetes e.g.).
+This will setup a few virtual machines (VM) with different supported Linux operating systems and installs `containerd`, `runc` and the `CNI` plugins (which are needed by Kubernetes e.g.).
 
 A small verification step is also included. It pulls a nginx container and runs it to make sure that `containerd` is setup correctly and is able to run container images:
 
 ```bash
-molecule verify -s kvm
+molecule verify
 ```
 
 To clean up run
 
 ```bash
-molecule destroy -s kvm
+molecule destroy
 ```
 
 License
