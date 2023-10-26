@@ -336,31 +336,6 @@ containerd_config: |
 
 
 #################################################
-# runc
-#################################################
-
-# Directory where to store the "runc" binary.
-#
-# As mentioned above if "containerd_flavor: base" was specified "runc" needs
-# to be installed separately. Without a "runc" binary containerd won't work.
-#
-# Commented by default. If "runc" should be installed just remove the comment
-# and adjust the value if needed. But the default should be just fine.
-# As long as "containerd_runc_binary_directory" is commented all the other
-# "containerd_runc_*" variables have no effect. The same is true if
-# "containerd_flavor: base" is specified.
-# containerd_runc_binary_directory: "/usr/local/sbin"
-
-# Owner/group of "runc" binary. If the variables are not set
-# the resulting binary will be owned by the current user.
-containerd_runc_owner: "root"
-containerd_runc_group: "root"
-
-# Specifies the permissions of the "runc" binary
-containerd_runc_binary_mode: "0755"
-
-
-#################################################
 # crictl
 #################################################
 
@@ -485,7 +460,12 @@ containerd_cni_netconfig_file_content: |
 Dependencies
 ------------
 
-[githubixx.runc](https://galaxy.ansible.com/githubixx/runc) is an optional dependency in case `containerd_flavor` is set to `base`. But in general every Ansible role that installs `runc` binary should be good enough. In case `runc` is already installed this dependency can be ignored.
+Optional dependencies (e.g. needed for Kubernetes):
+
+- [runc](https://github.com/githubixx/ansible-role-runc)
+- [CNI](https://github.com/githubixx/ansible-role-cni)
+
+You can use every other `runc` and `CNI` role of course.
 
 Example Playbook
 ----------------
