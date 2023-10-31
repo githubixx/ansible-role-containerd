@@ -47,3 +47,13 @@
     - name: Include runc role
       ansible.builtin.include_role:
         name: githubixx.runc
+
+- name: Install CNI plugins
+  hosts: all
+  remote_user: vagrant
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Include CNI role
+      ansible.builtin.include_role:
+        name: githubixx.cni
