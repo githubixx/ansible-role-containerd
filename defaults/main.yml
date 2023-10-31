@@ -6,7 +6,7 @@
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.7"
+containerd_version: "1.7.8"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
@@ -53,7 +53,8 @@ containerd_service_settings:
   "LimitCORE": "infinity"
 
 # Content of configuration file of "containerd". The settings below are the
-# settings that are different to the default "containerd" settings.
+# settings that are different to the default "containerd" settings. So this
+# seetings will override the default settings.
 #
 # The default "containerd" configuration can be generated with this command:
 #
