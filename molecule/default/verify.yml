@@ -1,9 +1,12 @@
 ---
 - name: Verify setup
   hosts: all
+  vars:
+    containerd__nginx_version: "1.24"
   tasks:
     - name: Pull nginx image with ctr
-      ansible.builtin.command: ctr images pull docker.io/library/nginx:1.24
+      ansible.builtin.command:
+        cmd: "ctr images pull docker.io/library/nginx:{{ containerd__nginx_version }}"
       register: ctr_pull_output
       changed_when: false
 
@@ -13,11 +16,13 @@
           - "'done' in ctr_pull_output.stdout"
 
     - name: Start nginx with ctr
-      ansible.builtin.command: ctr run -d -t docker.io/library/nginx:1.21 nginx
+      ansible.builtin.command:
+        cmd: "ctr run -d -t docker.io/library/nginx:{{ containerd__nginx_version }} nginx"
       changed_when: false
 
     - name: List containers
-      ansible.builtin.command: ctr containers ls
+      ansible.builtin.command:
+        cmd: "ctr containers ls"
       register: ctr_ls_output
       changed_when: false
 
