@@ -84,6 +84,7 @@ containerd_service_settings:
 #   https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
 #
 containerd_config: |
+  version = 2
   [plugins]
     [plugins."io.containerd.grpc.v1.cri"]
       [plugins."io.containerd.grpc.v1.cri".cni]
