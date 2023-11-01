@@ -1,0 +1,56 @@
+---
+# Copyright (C) 2021-2023 Robert Wimmer
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+- name: Verify setup
+  hosts: all
+  vars:
+    containerd__nginx_version: "1.24"
+  tasks:
+    - name: Pull nginx image with ctr
+      ansible.builtin.command:
+        cmd: "ctr images pull docker.io/library/nginx:{{ containerd__nginx_version }}"
+      register: ctr_pull_output
+      changed_when: false
+
+    - name: Ensure ctr output contains correct string
+      ansible.builtin.assert:
+        that:
+          - "'done' in ctr_pull_output.stdout"
+
+    - name: Start nginx with ctr
+      ansible.builtin.command:
+        cmd: "ctr run -d -t docker.io/library/nginx:{{ containerd__nginx_version }} nginx"
+      changed_when: false
+
+    - name: List containers
+      ansible.builtin.command:
+        cmd: "ctr containers ls"
+      register: ctr_ls_output
+      changed_when: false
+
+    - name: Ensure nginx container running
+      ansible.builtin.assert:
+        that:
+          - "'nginx' in ctr_ls_output.stdout"
+
+    - name: Run curl in nginx container
+      ansible.builtin.command:
+        cmd: "ctr task exec --exec-id curl nginx curl -sfS 127.0.0.1:80"
+      register: ctr_task_output
+      changed_when: false
+
+    - name: Ensure curl command was successful
+      ansible.builtin.assert:
+        that:
+          - "'Welcome to nginx' in ctr_task_output.stdout"
+
+    - name: Stop nginx container
+      ansible.builtin.command:
+        cmd: "ctr task kill nginx"
+      changed_when: false
+
+    - name: Remove nginx container
+      ansible.builtin.command:
+        cmd: "ctr c remove nginx"
+      changed_when: false
