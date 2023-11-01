@@ -89,4 +89,3 @@ containerd_config: |
     [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
       args = ["--decryption-keys-path", "{{ containerd_config_directory }}/ocicrypt/keys"]
       env = ["OCICRYPT_KEYPROVIDER_CONFIG={{ containerd_config_directory }}/ocicrypt/ocicrypt_keyprovider.conf"]
-
