@@ -13,6 +13,26 @@ Changelog
 
 see [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md)
 
+Installation
+------------
+
+- Directly download from Github (change into Ansible role directory before cloning):
+`git clone https://github.com/githubixx/ansible-role-containerd.git githubixx.containerd`
+
+- Via `ansible-galaxy` command and download directly from Ansible Galaxy:
+`ansible-galaxy install role githubixx.containerd`
+
+- Create a `requirements.yml` file with the following content (this will download the role from Github) and install with
+`ansible-galaxy role install -r requirements.yml`:
+
+```yaml
+---
+roles:
+  - name: githubixx.containerd
+    src: https://github.com/githubixx/ansible-role-containerd.git
+    version: 0.10.0+1.7.3
+```
+
 Role Variables
 --------------
 
