@@ -11,7 +11,37 @@ Ansible role to install [containerd](https://github.com/containerd/containerd). 
 Changelog
 ---------
 
-see [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md)
+**Change history:**
+
+See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md)
+
+**Changes in the last two versions:**
+
+0.12.0+1.7.8
+
+- add missing configuration options to make `containerd` work with Kubernetes out of the box: `[plugins."io.containerd.grpc.v1.cri"]` -> `sandbox_image = "registry.k8s.io/pause:3.8` and `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc` -> `runtime_type = "io.containerd.runc.v2"`
+- add `"Type": "notify"` to `containerd_config`
+
+0.11.0+1.7.8
+
+**Note** This release contains quite a few breaking changes. This mostly happened because `cri-containerd-*.tar.gz release bundles` are [deprecated](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features). Also see [cri-containerd.DEPRECATED.txt](https://github.com/containerd/containerd/blob/main/releases/cri-containerd.DEPRECATED.txt). So `containerd` doesn't contain `CNI plugins` and `runc` anymore. You can still use this bundle if you use version `0.10.0+1.7.3` of this Ansible role. But for this version I deciced to remove the support already before `containerd` `v2.0` will be released. That means for `containerd_flavor` only the value `base` can be used and `k8s` has been gone. So that means you have to install [CNI - Container Network Interface](https://github.com/containernetworking/plugins) and [runc](https://github.com/opencontainers/runc) separately. This should happen before you install `containerd`. You can use my Ansible roles
+
+- For CNI: [ansible-role-cni](https://github.com/githubixx/ansible-role-cni)
+- For runc: [ansible-role-runc](https://github.com/githubixx/ansible-role-runc)
+
+Other changes:
+
+- **Breaking** `containerd_config` variable contained a complete dump of all possible `containerd` configuration settings. The dump was created with `containerd config default`. So if you just need to execute this command to get all possible configuration options. Since most settings are not relevant I changed the value accordingly and only keep what's different to the default settings. The current settings are intended to be used with a Kubernetes cluster. But in general they should also be a good starting point for standalone installations of `containerd`. If you had your own `containerd_config` variable defined this change doesn't affect you.
+- **Breaking** `containerd_flavor` variable only supports `base` value. `k8s` was removed. This variable most probably will be go away in a later release. If you already used `base` value here the change wont affect you.
+- **Breaking** `containerd_archive_k8s` variable was removed
+- **Breaking** All `runc` related resources and variables were removed: `containerd_runc_binary_directory`, `containerd_runc_owner`, `containerd_runc_group`, `containerd_runc_binary_mode`
+- **Breaking** All `crictl`  related resources and variables were removed: `containerd_crictl_config_file`, `containerd_crictl_config_directory`, `containerd_crictl_config_directory_mode`, `containerd_crictl_config_directory_owner`, `containerd_crictl_config_directory_group`, `containerd_crictl_config_file_owner`, `containerd_crictl_config_file_group`, `containerd_crictl_config_file_mode`, `containerd_crictl_config_file_content`
+- **Breaking** All `CNI` related resources and variables were removed: `containerd_cni_binary_directory`, `containerd_cni_binary_directory_mode`, `containerd_cni_binary_owner`, `containerd_cni_binary_group`, `containerd_cni_binary_mode`, `containerd_cni_netconfig_file`, `containerd_cni_netconfig_directory`, `containerd_cni_netconfig_directory_mode`, `containerd_cni_netconfig_file_owner`, `containerd_cni_netconfig_file_group`, `containerd_cni_netconfig_file_mode`, `containerd_cni_netconfig_file_content`
+- **Breaking** update to containerd configuration version 2 (that means first line in `containerd_config` variable is now `version = 2`)
+- update `containerd` to `v1.7.8`
+- Molecule: improve verification step
+- Molecule: increase memory for boxes
+- Molecule: rename `kvm` scenario to `default`
 
 Installation
 ------------
@@ -80,6 +110,7 @@ containerd_service_settings:
   "ExecStart": "{{ containerd_binary_directory }}/containerd"
   "Restart": "always"
   "RestartSec": "5"
+  "Type": "notify"
   "Delegate": "yes"
   "KillMode": "process"
   "OOMScoreAdjust": "-999"
@@ -107,12 +138,14 @@ containerd_config: |
   version = 2
   [plugins]
     [plugins."io.containerd.grpc.v1.cri"]
+      sandbox_image = "registry.k8s.io/pause:3.8"
       [plugins."io.containerd.grpc.v1.cri".cni]
         bin_dir = "/opt/cni/bin"
         conf_dir = "/etc/cni/net.d"
       [plugins."io.containerd.grpc.v1.cri".containerd]
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            runtime_type = "io.containerd.runc.v2"
             [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
               BinaryName = "/usr/local/sbin/runc"
               SystemdCgroup = true

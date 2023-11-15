@@ -45,6 +45,7 @@ containerd_service_settings:
   "ExecStart": "{{ containerd_binary_directory }}/containerd"
   "Restart": "always"
   "RestartSec": "5"
+  "Type": "notify"
   "Delegate": "yes"
   "KillMode": "process"
   "OOMScoreAdjust": "-999"
@@ -73,12 +74,14 @@ containerd_config: |
   version = 2
   [plugins]
     [plugins."io.containerd.grpc.v1.cri"]
+      sandbox_image = "registry.k8s.io/pause:3.8"
       [plugins."io.containerd.grpc.v1.cri".cni]
         bin_dir = "/opt/cni/bin"
         conf_dir = "/etc/cni/net.d"
       [plugins."io.containerd.grpc.v1.cri".containerd]
         [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
           [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
+            runtime_type = "io.containerd.runc.v2"
             [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
               BinaryName = "/usr/local/sbin/runc"
               SystemdCgroup = true
