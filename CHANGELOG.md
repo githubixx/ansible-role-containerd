@@ -5,6 +5,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.0+1.7.8
+
+- add missing configuration options to make `containerd` work with Kubernetes out of the box: `[plugins."io.containerd.grpc.v1.cri"]` -> `sandbox_image = "registry.k8s.io/pause:3.8"` and `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc` -> `runtime_type = "io.containerd.runc.v2"`
+- add `"Type": "notify"` to `containerd_config` 
+
 ## 0.11.0+1.7.8
 
 **Note** This release contains quite a few breaking changes. This mostly happened because `cri-containerd-*.tar.gz release bundles` are [deprecated](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features). Also see [cri-containerd.DEPRECATED.txt](https://github.com/containerd/containerd/blob/main/releases/cri-containerd.DEPRECATED.txt). So `containerd` doesn't contain `CNI plugins` and `runc` anymore. You can still use this bundle if you use version `0.10.0+1.7.3` of this Ansible role. But for this version I deciced to remove the support already before `containerd` `v2.0` will be released. That means for `containerd_flavor` only the value `base` can be used and `k8s` has been gone. So that means you have to install [CNI - Container Network Interface](https://github.com/containernetworking/plugins) and [runc](https://github.com/opencontainers/runc) separately. This should happen before you install `containerd`. You can use my Ansible roles
