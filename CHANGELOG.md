@@ -8,6 +8,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 ## 0.12.2+1.7.10
 
 - update `containerd` to `v1.7.10`
+- remove CNI leftovers
 
 ## 0.12.1+1.7.9
 
