@@ -5,6 +5,15 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.2+1.7.10
+
+- update `containerd` to `v1.7.10`
+- remove CNI leftovers
+
+## 0.12.1+1.7.9
+
+- update `containerd` to `v1.7.9`
+
 ## 0.12.0+1.7.8
 
 - add missing configuration options to make `containerd` work with Kubernetes out of the box: `[plugins."io.containerd.grpc.v1.cri"]` -> `sandbox_image = "registry.k8s.io/pause:3.8"` and `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc` -> `runtime_type = "io.containerd.runc.v2"`
