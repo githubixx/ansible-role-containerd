@@ -54,7 +54,7 @@ containerd_service_settings:
   "LimitCORE": "infinity"
 
 # Content of configuration file of "containerd". The settings below are the
-# settings that are different to the default "containerd" settings. So this
+# settings that are different to the default "containerd" settings. So these
 # seetings will override the default settings.
 #
 # The default "containerd" configuration can be generated with this command:
