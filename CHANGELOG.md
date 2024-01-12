@@ -5,6 +5,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.3+1.7.12
+
+- update `containerd` to `v1.7.12`
+- adjust Github action because of Ansible Galaxy changes
+
 ## 0.12.2+1.7.10
 
 - update `containerd` to `v1.7.10`
