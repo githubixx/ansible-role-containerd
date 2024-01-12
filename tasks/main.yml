@@ -8,6 +8,17 @@
   tags:
     - containerd-install
 
+- name: Create containerd temporary directory
+  ansible.builtin.file:
+    path: "{{ containerd_tmp_directory }}"
+    state: directory
+    mode: 0700
+    owner: root
+    group: root
+  tags:
+    - containerd-install
+    - containerd-config
+
 - name: Downloading containerd archive
   ansible.builtin.get_url:
     url: "{{ containerd_url }}"
@@ -51,7 +62,7 @@
     owner: root
     group: root
   tags:
-    - containerd_install
+    - containerd-install
     - containerd-config
 
 - name: Create containerd configuration file
@@ -64,7 +75,7 @@
   notify:
     - Restart containerd
   tags:
-    - containerd_install
+    - containerd-install
     - containerd-config
 
 - name: Find location of modprobe binary
@@ -90,7 +101,7 @@
   ansible.builtin.debug:
     msg: "Using {{ modprobe_location }} in containerd.service"
   tags:
-    - containerd_install
+    - containerd-install
 
 - name: Create containerd.service systemd file
   ansible.builtin.template:
