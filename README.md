@@ -17,6 +17,13 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+0.12.4+1.7.12
+
+- add task that creates directory specified in containerd_tmp_directory
+- fix typo in defaults/main.yml
+- Molecule: Change IP addresses
+- Molecule: add two new host variables in `molecule/default/molecule.yml`
+
 0.12.3+1.7.12
 
 NOTE: If you upgrade from a version <= `0.11.0+1.7.8` please read [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md) for that version carefully because of breaking changes!
@@ -27,10 +34,6 @@ NOTE: If you upgrade from a version <= `0.11.0+1.7.8` please read [CHANGELOG](ht
 0.12.2+1.7.10
 
 - update `containerd` to `v1.7.10`
-
-0.12.1+1.7.9
- 
-- update `containerd` to `v1.7.9`
 
 Installation
 ------------

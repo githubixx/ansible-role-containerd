@@ -5,6 +5,13 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.4+1.7.12
+
+- add task that creates directory specified in containerd_tmp_directory
+- fix typo in defaults/main.yml
+- Molecule: Change IP addresses
+- Molecule: add two new host variables in `molecule/default/molecule.yml`
+
 ## 0.12.3+1.7.12
 
 - update `containerd` to `v1.7.12`
