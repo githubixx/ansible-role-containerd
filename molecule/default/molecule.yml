@@ -24,7 +24,7 @@ platforms:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 192.168.10.10
+        ip: 172.16.10.10
   - name: test-cd-ubuntu2204-base
     box: generic/ubuntu2204
     memory: 2048
@@ -35,7 +35,7 @@ platforms:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 192.168.10.20
+        ip: 172.16.10.20
   - name: test-cd-arch-base
     box: archlinux/archlinux
     memory: 2048
@@ -46,7 +46,7 @@ platforms:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 192.168.10.30
+        ip: 172.16.10.30
 
 provisioner:
   name: ansible
