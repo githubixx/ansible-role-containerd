@@ -5,6 +5,10 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.5+1.7.13
+
+- update `containerd` to `v1.7.13`
+
 ## 0.12.4+1.7.12
 
 - add task that creates directory specified in containerd_tmp_directory

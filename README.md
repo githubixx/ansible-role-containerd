@@ -17,6 +17,10 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.12.5+1.7.13
+
+- update `containerd` to `v1.7.13`
+
 0.12.4+1.7.12
 
 - add task that creates directory specified in containerd_tmp_directory
@@ -52,7 +56,7 @@ Installation
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.12.3+1.7.12
+    version: 0.12.4+1.7.13
 ```
 
 Role Variables
@@ -63,7 +67,7 @@ Role Variables
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.12"
+containerd_version: "1.7.13"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
