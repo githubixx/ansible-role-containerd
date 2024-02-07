@@ -56,7 +56,7 @@ Installation
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.12.4+1.7.13
+    version: 0.12.5+1.7.13
 ```
 
 Role Variables
