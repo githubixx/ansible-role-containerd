@@ -17,27 +17,13 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.12.6+1.7.15
+
+- update `containerd` to `v1.7.15`
+
 ## 0.12.5+1.7.13
 
 - update `containerd` to `v1.7.13`
-
-0.12.4+1.7.12
-
-- add task that creates directory specified in containerd_tmp_directory
-- fix typo in defaults/main.yml
-- Molecule: Change IP addresses
-- Molecule: add two new host variables in `molecule/default/molecule.yml`
-
-0.12.3+1.7.12
-
-NOTE: If you upgrade from a version <= `0.11.0+1.7.8` please read [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md) for that version carefully because of breaking changes!
-
-- update `containerd` to `v1.7.12`
-- adjust Github action because of Ansible Galaxy changes
-
-0.12.2+1.7.10
-
-- update `containerd` to `v1.7.10`
 
 Installation
 ------------
@@ -56,7 +42,7 @@ Installation
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.12.5+1.7.13
+    version: 0.12.6+1.7.15
 ```
 
 Role Variables
@@ -67,7 +53,7 @@ Role Variables
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.13"
+containerd_version: "1.7.15"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
