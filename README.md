@@ -3,13 +3,11 @@ Copyright (C) 2021-2023 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-ansible-role-containerd
-=======================
+# ansible-role-containerd
 
 Ansible role to install [containerd](https://github.com/containerd/containerd). `containerd` is an industry-standard container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.
 
-Changelog
----------
+## Changelog
 
 **Change history:**
 
@@ -17,16 +15,20 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
-## 0.12.6+1.7.15
+### 0.12.6+1.7.15
 
-- update `containerd` to `v1.7.15`
+- **UPDATE**
+  - update `containerd` to `v1.7.15`
 
-## 0.12.5+1.7.13
+- **MOLECULE**
+  - use `alvistack` instead of `generic` Vagrant boxes
 
-- update `containerd` to `v1.7.13`
+### 0.12.5+1.7.13
 
-Installation
-------------
+- **UPDATE**
+  - update `containerd` to `v1.7.13`
+
+## Installation
 
 - Directly download from Github (change into Ansible role directory before cloning):
 `git clone https://github.com/githubixx/ansible-role-containerd.git githubixx.containerd`
@@ -45,8 +47,7 @@ roles:
     version: 0.12.6+1.7.15
 ```
 
-Role Variables
---------------
+## Role Variables
 
 ```yaml
 # Only value "base" is currently supported
@@ -140,8 +141,7 @@ containerd_config: |
       env = ["OCICRYPT_KEYPROVIDER_CONFIG={{ containerd_config_directory }}/ocicrypt/ocicrypt_keyprovider.conf"]
 ```
 
-Dependencies
-------------
+## Dependencies
 
 Optional dependencies (e.g. needed for Kubernetes):
 
@@ -150,8 +150,7 @@ Optional dependencies (e.g. needed for Kubernetes):
 
 You can use every other `runc` and `CNI` role of course.
 
-Example Playbook
-----------------
+## Example Playbook
 
 ```yaml
 - hosts: your-host
@@ -161,8 +160,7 @@ Example Playbook
 
 More examples are available in the [Molecule tests](https://github.com/githubixx/ansible-role-containerd/tree/master/molecule/kvm).
 
-Testing
--------
+## Testing
 
 This role has a small test setup that is created using [Molecule](https://github.com/ansible-community/molecule), libvirt (vagrant-libvirt) and QEMU/KVM. Please see my blog post [Testing Ansible roles with Molecule, libvirt (vagrant-libvirt) and QEMU/KVM](https://www.tauceti.blog/posts/testing-ansible-roles-with-molecule-libvirt-vagrant-qemu-kvm/) how to setup. The test configuration is [here](https://github.com/githubixx/ansible-role-containerd/tree/master/molecule/kvm).
 
@@ -186,12 +184,10 @@ To clean up run
 molecule destroy
 ```
 
-License
--------
+## License
 
 GNU GENERAL PUBLIC LICENSE Version 3
 
-Author Information
-------------------
+## Author Information
 
 [http://www.tauceti.blog](http://www.tauceti.blog)

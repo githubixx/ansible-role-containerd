@@ -7,11 +7,16 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 ## 0.12.6+1.7.15
 
-- update `containerd` to `v1.7.15`
+- **UPDATE**
+  - update `containerd` to `v1.7.15`
+
+- **MOLECULE**
+  - use `alvistack` instead of `generic` Vagrant boxes
 
 ## 0.12.5+1.7.13
 
-- update `containerd` to `v1.7.13`
+- **UPDATE**
+  - update `containerd` to `v1.7.13`
 
 ## 0.12.4+1.7.12
 
@@ -37,7 +42,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 ## 0.12.0+1.7.8
 
 - add missing configuration options to make `containerd` work with Kubernetes out of the box: `[plugins."io.containerd.grpc.v1.cri"]` -> `sandbox_image = "registry.k8s.io/pause:3.8"` and `[plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc` -> `runtime_type = "io.containerd.runc.v2"`
-- add `"Type": "notify"` to `containerd_config` 
+- add `"Type": "notify"` to `containerd_config`
 
 ## 0.11.0+1.7.8
 
