@@ -3,13 +3,11 @@ Copyright (C) 2021-2023 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
-ansible-role-containerd
-=======================
+# ansible-role-containerd
 
 Ansible role to install [containerd](https://github.com/containerd/containerd). `containerd` is an industry-standard container runtime with an emphasis on simplicity, robustness and portability. It is available as a daemon for Linux and Windows, which can manage the complete container lifecycle of its host system: image transfer and storage, container execution and supervision, low-level storage and network attachments, etc.
 
-Changelog
----------
+## Changelog
 
 **Change history:**
 
@@ -17,30 +15,20 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
-## 0.12.5+1.7.13
+### 0.12.6+1.7.15
 
-- update `containerd` to `v1.7.13`
+- **UPDATE**
+  - update `containerd` to `v1.7.15`
 
-0.12.4+1.7.12
+- **MOLECULE**
+  - use `alvistack` instead of `generic` Vagrant boxes
 
-- add task that creates directory specified in containerd_tmp_directory
-- fix typo in defaults/main.yml
-- Molecule: Change IP addresses
-- Molecule: add two new host variables in `molecule/default/molecule.yml`
+### 0.12.5+1.7.13
 
-0.12.3+1.7.12
+- **UPDATE**
+  - update `containerd` to `v1.7.13`
 
-NOTE: If you upgrade from a version <= `0.11.0+1.7.8` please read [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md) for that version carefully because of breaking changes!
-
-- update `containerd` to `v1.7.12`
-- adjust Github action because of Ansible Galaxy changes
-
-0.12.2+1.7.10
-
-- update `containerd` to `v1.7.10`
-
-Installation
-------------
+## Installation
 
 - Directly download from Github (change into Ansible role directory before cloning):
 `git clone https://github.com/githubixx/ansible-role-containerd.git githubixx.containerd`
@@ -56,18 +44,17 @@ Installation
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.12.5+1.7.13
+    version: 0.12.6+1.7.15
 ```
 
-Role Variables
---------------
+## Role Variables
 
 ```yaml
 # Only value "base" is currently supported
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.13"
+containerd_version: "1.7.15"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
@@ -154,8 +141,7 @@ containerd_config: |
       env = ["OCICRYPT_KEYPROVIDER_CONFIG={{ containerd_config_directory }}/ocicrypt/ocicrypt_keyprovider.conf"]
 ```
 
-Dependencies
-------------
+## Dependencies
 
 Optional dependencies (e.g. needed for Kubernetes):
 
@@ -164,8 +150,7 @@ Optional dependencies (e.g. needed for Kubernetes):
 
 You can use every other `runc` and `CNI` role of course.
 
-Example Playbook
-----------------
+## Example Playbook
 
 ```yaml
 - hosts: your-host
@@ -175,8 +160,7 @@ Example Playbook
 
 More examples are available in the [Molecule tests](https://github.com/githubixx/ansible-role-containerd/tree/master/molecule/kvm).
 
-Testing
--------
+## Testing
 
 This role has a small test setup that is created using [Molecule](https://github.com/ansible-community/molecule), libvirt (vagrant-libvirt) and QEMU/KVM. Please see my blog post [Testing Ansible roles with Molecule, libvirt (vagrant-libvirt) and QEMU/KVM](https://www.tauceti.blog/posts/testing-ansible-roles-with-molecule-libvirt-vagrant-qemu-kvm/) how to setup. The test configuration is [here](https://github.com/githubixx/ansible-role-containerd/tree/master/molecule/kvm).
 
@@ -200,12 +184,10 @@ To clean up run
 molecule destroy
 ```
 
-License
--------
+## License
 
 GNU GENERAL PUBLIC LICENSE Version 3
 
-Author Information
-------------------
+## Author Information
 
 [http://www.tauceti.blog](http://www.tauceti.blog)
