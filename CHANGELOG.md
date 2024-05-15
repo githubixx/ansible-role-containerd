@@ -5,6 +5,11 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.12.7+1.7.16
+
+- **UPDATE**
+  - update `containerd` to `v1.7.16`
+
 ## 0.12.6+1.7.15
 
 - **UPDATE**
