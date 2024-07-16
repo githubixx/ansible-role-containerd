@@ -36,6 +36,17 @@ platforms:
         network_name: private_network
         type: static
         ip: 172.16.10.20
+  - name: test-cd-ubuntu2404-base
+    box: alvistack/ubuntu-24.04
+    memory: 2048
+    cpus: 2
+    groups:
+      - ubuntu
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: static
+        ip: 172.16.10.30
   - name: test-cd-arch-base
     box: archlinux/archlinux
     memory: 2048
@@ -46,7 +57,7 @@ platforms:
       - auto_config: true
         network_name: private_network
         type: static
-        ip: 172.16.10.30
+        ip: 172.16.10.40
 
 provisioner:
   name: ansible

@@ -15,18 +15,18 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.13.0+1.7.19
+
+- **FEATURE**
+  - add support for Ubuntu 24.04
+
+- **UPDATE**
+  - update `containerd` to `v1.7.19`
+
 ## 0.12.7+1.7.16
 
 - **UPDATE**
   - update `containerd` to `v1.7.16`
-
-### 0.12.6+1.7.15
-
-- **UPDATE**
-  - update `containerd` to `v1.7.15`
-
-- **MOLECULE**
-  - use `alvistack` instead of `generic` Vagrant boxes
 
 ## Installation
 
@@ -44,7 +44,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.12.7+1.7.16
+    version: 0.13.0+1.7.19
 ```
 
 ## Role Variables
@@ -54,7 +54,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.16"
+containerd_version: "1.7.19"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
