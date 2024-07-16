@@ -5,6 +5,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.13.0+1.7.19
+
+- **FEATURE**
+  - add support for Ubuntu 24.04
+
+- **UPDATE**
+  - update `containerd` to `v1.7.19`
+
 ## 0.12.7+1.7.16
 
 - **UPDATE**

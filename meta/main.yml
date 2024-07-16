@@ -15,6 +15,7 @@ galaxy_info:
       versions:
         - "focal"
         - "jammy"
+        - "noble"
   galaxy_tags:
     - kubernetes
     - k8s
