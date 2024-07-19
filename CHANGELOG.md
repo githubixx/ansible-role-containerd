@@ -1,9 +1,14 @@
 <!--
-Copyright (C) 2021-2023 Robert Wimmer
+Copyright (C) 2021-2024 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # Changelog
+
+## 0.13.1+1.7.20
+
+- **UPDATE**
+  - update `containerd` to `v1.7.20`
 
 ## 0.13.0+1.7.19
 

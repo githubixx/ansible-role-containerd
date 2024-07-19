@@ -1,5 +1,5 @@
 <!--
-Copyright (C) 2021-2023 Robert Wimmer
+Copyright (C) 2021-2024 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
@@ -15,6 +15,11 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.13.1+1.7.20
+
+- **UPDATE**
+  - update `containerd` to `v1.7.20`
+
 ## 0.13.0+1.7.19
 
 - **FEATURE**
@@ -22,11 +27,6 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 - **UPDATE**
   - update `containerd` to `v1.7.19`
-
-## 0.12.7+1.7.16
-
-- **UPDATE**
-  - update `containerd` to `v1.7.16`
 
 ## Installation
 
@@ -44,7 +44,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.13.0+1.7.19
+    version: 0.13.1+1.7.20
 ```
 
 ## Role Variables
