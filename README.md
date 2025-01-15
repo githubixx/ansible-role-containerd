@@ -1,5 +1,5 @@
 <!--
-Copyright (C) 2021-2024 Robert Wimmer
+Copyright (C) 2021-2025 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
@@ -14,6 +14,14 @@ Ansible role to install [containerd](https://github.com/containerd/containerd). 
 See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/master/CHANGELOG.md)
 
 **Recent changes:**
+
+## 0.14.0+2.0.2
+
+**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" fea
+tures so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
+
+- **UPDATE**
+  - update `containerd` to `v2.0.2`
 
 ## 0.13.2+1.7.22
 
@@ -49,7 +57,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.13.2+1.7.22
+    version: 0.14.0+2.0.2
 ```
 
 ## Role Variables
@@ -59,7 +67,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "1.7.22"
+containerd_version: "2.0.2"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"

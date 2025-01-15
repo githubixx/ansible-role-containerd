@@ -1,9 +1,16 @@
 <!--
-Copyright (C) 2021-2024 Robert Wimmer
+Copyright (C) 2021-2025 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # Changelog
+
+**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
+
+## 0.14.0+2.0.2
+
+- **UPDATE**
+  - update `containerd` to `v2.0.2`
 
 ## 0.13.2+1.7.22
 
