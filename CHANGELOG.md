@@ -11,6 +11,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 - **POTENTIALLY BREAKING**
   - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirements of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
+  - update list of containerd binaries in `containerd_binaries` variable. `containerd-shim-runc-v1` and `containerd-shim` were removed as no longer provided by upstream.
 
 - **UPDATE**
   - update `containerd` to `v2.0.2`
