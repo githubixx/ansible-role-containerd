@@ -17,11 +17,10 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 ## 0.14.0+2.0.2
 
-**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" fea
-tures so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
+**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
 
 - **POTENTIALLY BREAKING**
-  - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirments of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
+  - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirements of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
 
 - **UPDATE**
   - update `containerd` to `v2.0.2`
@@ -120,8 +119,8 @@ containerd_service_settings:
 
 # Content of configuration file of "containerd". The settings below are the
 # settings that are either different to the default "containerd" settings or
-# stated explicitely to make important settings more visible even if they're
-# default. So these seetings will override the default settings.
+# stated explicitly to make important settings more visible even if they're
+# default. So these settings will override the default settings.
 #
 # The default "containerd" configuration can be generated with this command:
 #
