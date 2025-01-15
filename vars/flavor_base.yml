@@ -5,9 +5,7 @@
 containerd_binaries_src_directory: "/bin"
 
 containerd_binaries:
-  - containerd
-  - containerd-shim
-  - containerd-shim-runc-v1
-  - containerd-shim-runc-v2
   - ctr
+  - containerd
   - containerd-stress
+  - containerd-shim-runc-v2
