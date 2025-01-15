@@ -17,6 +17,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
   - update `containerd` to `v2.0.2`
   - `templates/etc/systemd/system/containerd.service.j2`: add `dbus.service` to `After=`
 
+- **MOLECULE**
+  - adjust expected output of `ctr pull` command
+
 ## 0.13.2+1.7.22
 
 - **UPDATE**
