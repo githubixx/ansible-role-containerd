@@ -20,6 +20,9 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 **Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" fea
 tures so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
 
+- **POTENTIALLY BREAKING**
+  - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirments of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
+
 - **UPDATE**
   - update `containerd` to `v2.0.2`
 
@@ -115,43 +118,42 @@ containerd_service_settings:
   "LimitCORE": "infinity"
 
 # Content of configuration file of "containerd". The settings below are the
-# settings that are different to the default "containerd" settings.
+# settings that are either different to the default "containerd" settings or
+# stated explicitely to make important settings more visible even if they're
+# default. So these seetings will override the default settings.
 #
 # The default "containerd" configuration can be generated with this command:
 #
 # containerd config default
 #
+# A full configuration example with all possible options is also available here:
+# https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration
+#
+# Also if you want to adjust settings please consult the CRI Plugin Config Guide:
+# https://github.com/containerd/containerd/blob/main/docs/cri/config.md
+#
 # Difference to default configuration:
 #
-# - The configuration file contains a few role variables that will be replaced when
-#   the configuration template is processed.
 # - In 'plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options' the
 #   setting "SystemdCgroup" is set to "true" instead of "false". This is relevant for
 #   Kubernetes e.g. Also see:
 #   https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
 #
 containerd_config: |
-  version = 2
+  version = 3
   [plugins]
-    [plugins."io.containerd.grpc.v1.cri"]
-      sandbox_image = "registry.k8s.io/pause:3.8"
-      [plugins."io.containerd.grpc.v1.cri".cni]
-        bin_dir = "/opt/cni/bin"
-        conf_dir = "/etc/cni/net.d"
-      [plugins."io.containerd.grpc.v1.cri".containerd]
-        [plugins."io.containerd.grpc.v1.cri".containerd.runtimes]
-          [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc]
-            runtime_type = "io.containerd.runc.v2"
-            [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
-              BinaryName = "/usr/local/sbin/runc"
+    [plugins.'io.containerd.cri.v1.runtime']
+      [plugins.'io.containerd.cri.v1.runtime'.containerd]
+        default_runtime_name = 'runc'
+        [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes]
+          [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc]
+            runtime_type = 'io.containerd.runc.v2'
+            [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc.options]
+              BinaryName = '/usr/local/sbin/runc'
               SystemdCgroup = true
-  [stream_processors]
-    [stream_processors."io.containerd.ocicrypt.decoder.v1.tar"]
-      args = ["--decryption-keys-path", "{{ containerd_config_directory }}/ocicrypt/keys"]
-      env = ["OCICRYPT_KEYPROVIDER_CONFIG={{ containerd_config_directory }}/ocicrypt/ocicrypt_keyprovider.conf"]
-    [stream_processors."io.containerd.ocicrypt.decoder.v1.tar.gzip"]
-      args = ["--decryption-keys-path", "{{ containerd_config_directory }}/ocicrypt/keys"]
-      env = ["OCICRYPT_KEYPROVIDER_CONFIG={{ containerd_config_directory }}/ocicrypt/ocicrypt_keyprovider.conf"]
+      [plugins.'io.containerd.cri.v1.runtime'.cni]
+        bin_dir = '/opt/cni/bin'
+        conf_dir = '/etc/cni/net.d'
 ```
 
 ## Dependencies

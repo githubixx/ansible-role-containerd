@@ -9,6 +9,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 ## 0.14.0+2.0.2
 
+- **POTENTIALLY BREAKING**
+  - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirments of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
+
 - **UPDATE**
   - update `containerd` to `v2.0.2`
 
