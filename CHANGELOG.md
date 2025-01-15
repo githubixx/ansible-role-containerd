@@ -1,9 +1,24 @@
 <!--
-Copyright (C) 2021-2024 Robert Wimmer
+Copyright (C) 2021-2025 Robert Wimmer
 SPDX-License-Identifier: GPL-3.0-or-later
 -->
 
 # Changelog
+
+**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
+
+## 0.14.0+2.0.2
+
+- **POTENTIALLY BREAKING**
+  - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirements of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
+  - update list of containerd binaries in `containerd_binaries` variable. `containerd-shim-runc-v1` and `containerd-shim` were removed as no longer provided by upstream.
+
+- **UPDATE**
+  - update `containerd` to `v2.0.2`
+  - `templates/etc/systemd/system/containerd.service.j2`: add `dbus.service` to `After=`
+
+- **MOLECULE**
+  - adjust expected output of `ctr pull` command
 
 ## 0.13.2+1.7.22
 
@@ -69,7 +84,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 ## 0.11.0+1.7.8
 
-**Note** This release contains quite a few breaking changes. This mostly happened because `cri-containerd-*.tar.gz release bundles` are [deprecated](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features). Also see [cri-containerd.DEPRECATED.txt](https://github.com/containerd/containerd/blob/main/releases/cri-containerd.DEPRECATED.txt). So `containerd` doesn't contain `CNI plugins` and `runc` anymore. You can still use this bundle if you use version `0.10.0+1.7.3` of this Ansible role. But for this version I deciced to remove the support already before `containerd` `v2.0` will be released. That means for `containerd_flavor` only the value `base` can be used and `k8s` has been gone. So that means you have to install [CNI - Container Network Interface](https://github.com/containernetworking/plugins) and [runc](https://github.com/opencontainers/runc) separately. This should happen before you install `containerd`. You can use my Ansible roles
+**Note** This release contains quite a few breaking changes. This mostly happened because `cri-containerd-*.tar.gz release bundles` are [deprecated](https://github.com/containerd/containerd/blob/main/RELEASES.md#deprecated-features). Also see [cri-containerd.DEPRECATED.txt](https://github.com/containerd/containerd/blob/main/releases/cri-containerd.DEPRECATED.txt). So `containerd` doesn't contain `CNI plugins` and `runc` anymore. You can still use this bundle if you use version `0.10.0+1.7.3` of this Ansible role. But for this version I decided to remove the support already before `containerd` `v2.0` will be released. That means for `containerd_flavor` only the value `base` can be used and `k8s` has been gone. So that means you have to install [CNI - Container Network Interface](https://github.com/containernetworking/plugins) and [runc](https://github.com/opencontainers/runc) separately. This should happen before you install `containerd`. You can use my Ansible roles
 
 - For CNI: [ansible-role-cni](https://github.com/githubixx/ansible-role-cni)
 - For runc: [ansible-role-runc](https://github.com/githubixx/ansible-role-runc)
@@ -164,7 +179,7 @@ Other changes:
 
 ## 0.2.0+1.5.8
 
-- add support for Kubernetes by allowing to optionally also install `runc`, `crtcl` and `CNI` plugins. `containerd` builds are available in two flavors: Either just the `containerd` binaries or `containerd` binaries plus everything else needed to use `containerd` together with Kubernetes. Please see [defaults/main.yml](https://github.com/githubixx/ansible-role-containerd/tree/master/defaults/main.yml) for all possible settings. With the Kubernetes support a lot of new variables were introduced but for almost all the default values should be good enough. The default `containerd_flavor: "base"` mimics the behavior of the previous version of this role. So upgrading shouldn't be an issue.
+- add support for Kubernetes by allowing to optionally also install `runc`, `crictl` and `CNI` plugins. `containerd` builds are available in two flavors: Either just the `containerd` binaries or `containerd` binaries plus everything else needed to use `containerd` together with Kubernetes. Please see [defaults/main.yml](https://github.com/githubixx/ansible-role-containerd/tree/master/defaults/main.yml) for all possible settings. With the Kubernetes support a lot of new variables were introduced but for almost all the default values should be good enough. The default `containerd_flavor: "base"` mimics the behavior of the previous version of this role. So upgrading shouldn't be an issue.
 
 ## 0.1.1+1.5.8
 
