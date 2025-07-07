@@ -14,17 +14,6 @@ driver:
     type: libvirt
 
 platforms:
-  - name: test-cd-ubuntu2004-base
-    box: generic/ubuntu2004
-    memory: 2048
-    cpus: 2
-    groups:
-      - ubuntu
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: static
-        ip: 172.16.10.10
   - name: test-cd-ubuntu2204-base
     box: alvistack/ubuntu-22.04
     memory: 2048
