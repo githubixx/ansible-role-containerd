@@ -23,6 +23,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 - **MOLECULE**
   - Use `generic/arch` Vagrant box instead of `archlinux/archlinux` (no longer available)
   - Install `openssl` package for Archlinux
+  - Removed Ubuntu 20.04 because reached end of life
 
 ## 0.14.0+2.0.2
 
