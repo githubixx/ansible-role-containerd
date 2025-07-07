@@ -22,7 +22,7 @@
 
     - name: Install Python
       ansible.builtin.raw: |
-        pacman -S --noconfirm python
+        pacman -S --noconfirm python openssl
       args:
         executable: /bin/bash
       changed_when: false
