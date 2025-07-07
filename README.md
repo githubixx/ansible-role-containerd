@@ -15,6 +15,16 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.15.0+2.1.3
+
+- **UPDATE**
+  - update `containerd` to `v2.1.3`
+
+- **MOLECULE**
+  - Use `generic/arch` Vagrant box instead of `archlinux/archlinux` (no longer available)
+  - Install `openssl` package for Archlinux
+  - Removed Ubuntu 20.04 because reached end of life
+
 ## 0.14.0+2.0.2
 
 **Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
@@ -29,24 +39,6 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 - **MOLECULE**
   - adjust expected output of `ctr pull` command
-
-## 0.13.2+1.7.22
-
-- **UPDATE**
-  - update `containerd` to `v1.7.22`
-
-## 0.13.1+1.7.20
-
-- **UPDATE**
-  - update `containerd` to `v1.7.20`
-
-## 0.13.0+1.7.19
-
-- **FEATURE**
-  - add support for Ubuntu 24.04
-
-- **UPDATE**
-  - update `containerd` to `v1.7.19`
 
 ## Installation
 
@@ -64,7 +56,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.14.0+2.0.2
+    version: 0.15.0+2.1.3
 ```
 
 ## Role Variables
@@ -74,7 +66,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "2.0.2"
+containerd_version: "2.1.3"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"

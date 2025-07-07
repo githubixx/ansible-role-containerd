@@ -5,9 +5,19 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
-**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
+## 0.15.0+2.1.3
+
+- **UPDATE**
+  - update `containerd` to `v2.1.3`
+
+- **MOLECULE**
+  - Use `generic/arch` Vagrant box instead of `archlinux/archlinux` (no longer available)
+  - Install `openssl` package for Archlinux
+  - Removed Ubuntu 20.04 because reached end of life
 
 ## 0.14.0+2.0.2
+
+**Note**: This a major release update to `containerd` version `2.0.2`! Please read the [changelog of containerd v2.0.2](https://github.com/containerd/containerd/blob/main/docs/containerd-2.0.md) accordingly! In general if you haven't used any "exotic" features so far this version of the Ansible role should cover everything already and upgrading should be smooth. Nevertheless you should test the changes before!
 
 - **POTENTIALLY BREAKING**
   - `containerd_config` variable value was adjusted to to meet `containerd` configuration requirements of version `3`. Please see [Full configuration](https://github.com/containerd/containerd/blob/main/docs/cri/config.md#full-configuration) for all possible values. If you haven't adjusted this variable then there should be no need to change anything and upgrading should be smooth.
