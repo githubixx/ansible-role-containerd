@@ -24,6 +24,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
   - update `containerd` to `v2.1.4`
   - update `.gitignore`
   - update `.yamllint`
+  - fix `ansible-lint` issues
 
 ## 0.15.0+2.1.3
 

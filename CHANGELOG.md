@@ -14,6 +14,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
   - update `containerd` to `v2.1.4`
   - update `.gitignore`
   - update `.yamllint`
+  - fix `ansible-lint` issues
 
 ## 0.15.0+2.1.3
 
