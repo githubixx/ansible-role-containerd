@@ -12,6 +12,7 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 - **UPDATE**
   - update `containerd` to `v2.1.4`
+  - update `.gitignore`
 
 ## 0.15.0+2.1.3
 

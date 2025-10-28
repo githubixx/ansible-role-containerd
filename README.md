@@ -22,6 +22,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 - **UPDATE**
   - update `containerd` to `v2.1.4`
+  - update `.gitignore`
 
 ## 0.15.0+2.1.3
 
