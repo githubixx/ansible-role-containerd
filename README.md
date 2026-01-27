@@ -15,6 +15,11 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.17.0+2.2.1
+
+- **UPDATE**
+  - update `containerd` to `v2.2.1`
+
 ## 0.16.0+2.1.4
 
 - **Breaking**
@@ -67,7 +72,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.16.0+2.1.4
+    version: 0.17.0+2.2.1
 ```
 
 ## Role Variables
@@ -77,7 +82,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "2.1.4"
+containerd_version: "2.2.1"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
