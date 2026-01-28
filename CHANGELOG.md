@@ -8,6 +8,12 @@ SPDX-License-Identifier: GPL-3.0-or-later
 - **UPDATE**
   - update `containerd` to `v2.2.1`
 
+- **FEATURE**
+  - support `conf.d` include in the [default config](https://github.com/containerd/containerd/pull/12323)
+
+- **MOLECULE**
+  - add test for `conf.d` include feature
+
 ## 0.16.0+2.1.4
 
 - **Breaking**
