@@ -5,6 +5,9 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+- **BREAKING**
+  - CNI `bin_dir` in CRI runtime config is deprecated (`plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir`) and will be removed in containerd `v2.3`. It was replaced with `bin_dirs` in the same section which supports a list of directories. So, `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir = '/opt/cni/bin'` was changed to `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dirs = ['/opt/cni/bin']` in `containerd_config` variable.
+
 - **UPDATE**
   - update `containerd` to `v2.2.1`
 

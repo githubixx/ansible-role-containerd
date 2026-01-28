@@ -17,6 +17,9 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 ## 0.17.0+2.2.1
 
+- **BREAKING**
+  - CNI `bin_dir` in CRI runtime config is deprecated (`plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir`) and will be removed in containerd `v2.3`. It was replaced with `bin_dirs` in the same section which supports a list of directories. So, `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir = '/opt/cni/bin'` was changed to `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dirs = ['/opt/cni/bin']` in `containerd_config` variable.
+
 - **UPDATE**
   - update `containerd` to `v2.2.1`
 
@@ -170,7 +173,7 @@ containerd_config: |
               BinaryName = '/usr/local/sbin/runc'
               SystemdCgroup = true
       [plugins.'io.containerd.cri.v1.runtime'.cni]
-        bin_dir = '/opt/cni/bin'
+        bin_dirs = ['/opt/cni/bin']
         conf_dir = '/etc/cni/net.d'
 
 # Optional: containerd config drop-ins via `imports` (containerd >= v2.2.0)
@@ -191,7 +194,7 @@ containerd_config: |
 #         disabled_plugins = []
 #
 #       20-cni.toml: |
-#         plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir = '/opt/cni/bin'
+#         plugins.'io.containerd.cri.v1.runtime'.cni.bin_dirs = ['/opt/cni/bin']
 #         plugins.'io.containerd.cri.v1.runtime'.cni.conf_dir = '/etc/cni/net.d'
 #
 # Example 2: Import additional directories but manage files elsewhere
