@@ -15,13 +15,18 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.18.0+2.3.0
+
+- **UPDATE**
+  - update `containerd` to `v2.3.0`
+
+- **MOLECULE**
+  - use own [githubixx Vagrant boxes](https://portal.cloud.hashicorp.com/vagrant/discover/githubixx)
+
 ## 0.17.0+2.2.1
 
 - **BREAKING**
   - CNI `bin_dir` in CRI runtime config is deprecated (`plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir`) and will be removed in containerd `v2.3`. It was replaced with `bin_dirs` in the same section which supports a list of directories. So, `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dir = '/opt/cni/bin'` was changed to `plugins.'io.containerd.cri.v1.runtime'.cni.bin_dirs = ['/opt/cni/bin']` in `containerd_config` variable.
-
-- **UPDATE**
-  - update `containerd` to `v2.2.1`
 
 - **FEATURE**
   - support `conf.d` include in the [default config](https://github.com/containerd/containerd/pull/12323)
@@ -81,7 +86,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.17.0+2.2.1
+    version: 0.18.0+2.3.0
 ```
 
 ## Role Variables
@@ -91,7 +96,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "2.2.1"
+containerd_version: "2.3.0"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
