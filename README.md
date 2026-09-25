@@ -15,6 +15,14 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 
 **Recent changes:**
 
+## 0.19.0+2.4.1
+
+- **UPDATE**
+  - update `containerd` to `v2.4.1`. Review the [2.4.0](https://github.com/containerd/containerd/releases/tag/v2.4.0) and [2.4.1](https://github.com/containerd/containerd/releases/tag/v2.4.1) release notes before upgrading.
+
+- **MOLECULE**
+  - Add Molecule checks for the installed version, service, socket, CRI plugins, idempotence, and verification.
+
 ## 0.18.0+2.3.0
 
 - **UPDATE**
@@ -64,7 +72,7 @@ See full [CHANGELOG](https://github.com/githubixx/ansible-role-containerd/blob/m
 roles:
   - name: githubixx.containerd
     src: https://github.com/githubixx/ansible-role-containerd.git
-    version: 0.18.0+2.3.0
+    version: 0.19.0+2.4.1
 ```
 
 ## Role Variables
@@ -74,7 +82,7 @@ roles:
 containerd_flavor: "base"
 
 # containerd version to install
-containerd_version: "2.3.0"
+containerd_version: "2.4.1"
 
 # Directory where to store "containerd" binaries
 containerd_binary_directory: "/usr/local/bin"
@@ -138,7 +146,7 @@ containerd_service_settings:
 #
 # Difference to default configuration:
 #
-# - In 'plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options' the
+# - In 'plugins."io.containerd.cri.v1.runtime".containerd.runtimes.runc.options' the
 #   setting "SystemdCgroup" is set to "true" instead of "false". This is relevant for
 #   Kubernetes e.g. Also see:
 #   https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd-systemd)
@@ -202,8 +210,6 @@ containerd_config_imports: []
 # Uses: `containerd --config <path> config dump`. If invalid, the play fails.
 containerd_validate_config: false
 ```
-
-## Dependencies
 
 Optional dependencies (e.g. needed for Kubernetes):
 
