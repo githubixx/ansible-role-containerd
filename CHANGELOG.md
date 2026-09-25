@@ -5,6 +5,14 @@ SPDX-License-Identifier: GPL-3.0-or-later
 
 # Changelog
 
+## 0.19.0+2.4.1
+
+- **UPDATE**
+  - update `containerd` to `v2.4.1`. Review the [2.4.0](https://github.com/containerd/containerd/releases/tag/v2.4.0) and [2.4.1](https://github.com/containerd/containerd/releases/tag/v2.4.1) release notes before upgrading.
+
+- **MOLECULE**
+  - Add Molecule checks for the installed version, service, socket, CRI plugins, idempotence, and verification.
+
 ## 0.18.0+2.3.0
 
 - **UPDATE**
